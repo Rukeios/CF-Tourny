@@ -146,6 +146,9 @@
     font-size:15px;padding:9px 11px}
   .empty{color:var(--muted);padding:38px 0;text-align:center;
     background:var(--raised);border:1px solid var(--line);border-radius:4px}
+  .back-top{position:fixed;right:20px;bottom:20px;z-index:30;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--teal);border-radius:50%;background:var(--raised);color:var(--teal);font-size:22px;font-weight:700;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s}
+  .back-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+  .back-top:hover{background:var(--teal);color:#06202E}
 </style>
 </head>
 <body>
@@ -387,6 +390,15 @@ document.getElementById('year').textContent = new Date().getFullYear();
   f.insertAdjacentHTML('beforeend', social + contact + legal + disc);
 })();
 
+</script>
+<button class="back-top" type="button" aria-label="Back to top" title="Back to top">&#8593;</button>
+<script>
+  (function(){
+    var button=document.querySelector('.back-top');
+    if(!button)return;
+    window.addEventListener('scroll',function(){button.classList.toggle('show',window.scrollY>400)},{passive:true});
+    button.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+  }());
 </script>
 </body>
 </html>
