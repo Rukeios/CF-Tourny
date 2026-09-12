@@ -138,9 +138,20 @@
   .embed{border:1px solid var(--line);border-radius:4px;overflow:hidden;
     margin-top:8px;background:#fff}
   .embed iframe{width:100%;border:0;display:block;min-height:640px}
-  .back-top{position:fixed;right:20px;bottom:20px;z-index:30;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--teal);border-radius:50%;background:var(--raised);color:var(--teal);font-size:22px;font-weight:700;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s}
-  .back-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
-  .back-top:hover{background:var(--teal);color:#06202E}
+
+  .langtog{
+    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
+    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
+  }
+  .langtog button{
+    font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
+    background:transparent;color:var(--muted);transition:.14s;
+  }
+  .langtog button:hover{color:var(--teal)}
+  .langtog button.on{background:var(--teal);color:#06202E}
+  .nav-in{align-items:center}
+
 </style>
 </head>
 <body>
@@ -343,19 +354,151 @@ function formBlock(url, label, cls){
          '" target="_blank" rel="noopener">' + label + '</a>';
 }
 
+function drawJoin(){
 document.getElementById('team-form').innerHTML =
   formBlock(TEAM_FORM, 'Register a team', 'go');
 document.getElementById('agent-form').innerHTML =
   formBlock(AGENT_FORM, 'Register as a free agent', 'coral');
-</script>
-<button class="back-top" type="button" aria-label="Back to top" title="Back to top">&#8593;</button>
-<script>
-  (function(){
-    var button=document.querySelector('.back-top');
-    if(!button)return;
-    window.addEventListener('scroll',function(){button.classList.toggle('show',window.scrollY>400)},{passive:true});
-    button.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
-  }());
+}
+drawJoin();
+
+/* ---------- Spanish strings ---------- */
+const STR = {
+ "Next up": "Próximos",
+ "News": "Noticias",
+ "Schedule": "Calendario",
+ "Standings": "Clasificación",
+ "Stats": "Estadísticas",
+ "Rules": "Reglas",
+ "FAQ": "Preguntas",
+ "Contact": "Contacto",
+ "Tools": "Herramientas",
+ "Join": "Únete",
+ "Home": "Inicio",
+ "Privacy": "Privacidad",
+ "Terms": "Términos",
+ "CaribbeanFye Official": "CaribbeanFye Official",
+ "Competitive Dunk City Dynasty ·": "Dunk City Dynasty competitivo ·",
+ "Discord": "Discord",
+ "TikTok": "TikTok",
+ "YouTube": "YouTube",
+ "Instagram": "Instagram",
+ "X": "X",
+ "Twitch": "Twitch",
+ "Replies within 48 hours": "Respondemos en menos de 48 horas",
+ "CaribbeanFye is an independent community organisation. Not affiliated with, endorsed by, or sponsored by NetEase, the NBA, the NBPA, or any other rights holder. Dunk City Dynasty and all related marks belong to their respective owners.": "CaribbeanFye es una organización comunitaria independiente. No está afiliada, respaldada ni patrocinada por NetEase, la NBA, la NBPA ni ningún otro titular de derechos. Dunk City Dynasty y todas las marcas relacionadas pertenecen a sus respectivos dueños.",
+ "Join the Discord": "Únete al Discord",
+ "See the schedule": "Ver el calendario",
+ "Full ruleset": "Reglamento completo",
+ "Common questions": "Preguntas frecuentes",
+ "Read the rules first": "Lee las reglas primero",
+ "Back to home": "Volver al inicio",
+ "Register a team": "Registra un equipo",
+ "Register as a free agent": "Regístrate como agente libre",
+ "Register a team, or sign up on your own and get scouted.": "Registra un equipo, o apúntate solo y deja que te fichen.",
+ "Two ways": "Dos formas",
+ "in": "de entrar",
+ "Got five players? Register a team. Flying solo? Get on the free agent list and orgs will find you.": "¿Tienes cinco jugadores? Registra un equipo. ¿Vas solo? Ponte en la lista de agentes libres y las organizaciones te encontrarán.",
+ "Got a squad": "Con equipo",
+ "Five players minimum, three active and two subs. One captain speaks for the roster.": "Mínimo cinco jugadores, tres activos y dos suplentes. Un capitán habla por la plantilla.",
+ "All players 18 or over": "Todos los jugadores con 18 años o más",
+ "Nobody rostered to another team": "Nadie inscrito en otro equipo",
+ "Discord handle and in-game name for each player": "Usuario de Discord y nombre en el juego de cada jugador",
+ "Takes about five minutes": "Toma unos cinco minutos",
+ "No team yet": "Sin equipo",
+ "Register on your own. Orgs scout this list for solo drafts and roster spots.": "Regístrate por tu cuenta. Las organizaciones revisan esta lista para drafts y plazas.",
+ "18 or over": "18 años o más",
+ "Not currently signed to a team": "Sin contrato actual con ningún equipo",
+ "Your region and when you usually play": "Tu región y cuándo sueles jugar",
+ "Takes about a minute": "Toma un minuto",
+ "Registration opens shortly. Join the Discord and you will hear first.": "La inscripción abre muy pronto. Únete al Discord y te enteras primero.",
+ "What": "Qué",
+ "happens": "pasa",
+ "next": "después",
+ "Everything runs through the server. Read the rules, accept them, and answer the onboarding questions to get access.": "Todo funciona a través del servidor. Lee las reglas, acéptalas y responde las preguntas de bienvenida para tener acceso.",
+ "Fill in the form": "Llena el formulario",
+ "Whichever one fits. Use the exact Discord handle and in-game name for every player, since that is how results get verified later.": "El que te corresponda. Usa el usuario de Discord y el nombre en el juego exactos de cada jugador, porque así se verifican los resultados después.",
+ "We verify the roster": "Verificamos la plantilla",
+ "We check every player against the other rosters so nobody is signed twice. Then you get your Team Captain and Player roles in Discord.": "Revisamos a cada jugador contra las demás plantillas para que nadie esté inscrito dos veces. Después recibes tus roles de Capitán y Jugador en Discord.",
+ "Play": "Juega",
+ "Watch the announcements channel for the next event. Brackets get posted before the night starts.": "Revisa el canal de anuncios para el próximo evento. Los brackets se publican antes de que empiece la noche."
+};
+function renderAll(){ drawJoin(); }
+
+/* =========================================================
+   LANGUAGE TOGGLE
+
+   Every visible English string has a Spanish counterpart in
+   the STR map below. Switching walks the page and swaps them.
+
+   To fix a translation: find the English line on the left,
+   change the Spanish on the right. Nothing else.
+   ========================================================= */
+
+let LANG = 'en';
+try{ LANG = localStorage.getItem('cf_lang') || 'en'; }catch(e){}
+
+function tr(s){
+  if(LANG === 'en') return s;
+  const k = String(s).trim();
+  return (STR[k] !== undefined) ? STR[k] : s;
+}
+
+/* swaps whole text nodes, so partial matches cannot corrupt anything */
+function walkTranslate(root, back){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+  const jobs = [];
+  while(w.nextNode()){
+    const n = w.currentNode;
+    const raw = n.nodeValue;
+    const t = raw.trim();
+    if(!t) continue;
+    if(n.parentElement && /SCRIPT|STYLE/.test(n.parentElement.tagName)) continue;
+
+    let out = null;
+    if(!back){
+      if(!n.__en) n.__en = t;
+      if(STR[n.__en] !== undefined) out = STR[n.__en];
+    } else if(n.__en){
+      out = n.__en;
+    }
+    if(out !== null && out !== undefined){
+      jobs.push([n, raw.replace(t, out)]);
+    }
+  }
+  jobs.forEach(j => { j[0].nodeValue = j[1]; });
+}
+
+function applyLang(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('.langtog button').forEach(b => {
+    b.classList.toggle('on', b.dataset.l === LANG);
+  });
+  /* re-render anything JS builds, then swap the static text */
+  if(typeof renderAll === 'function') renderAll();
+  walkTranslate(document.body, LANG === 'en');
+}
+
+function setLang(l){
+  LANG = l;
+  try{ localStorage.setItem('cf_lang', l); }catch(e){}
+  applyLang();
+}
+
+(function(){
+  const nav = document.querySelector('.nav-in');
+  if(nav){
+    const d = document.createElement('div');
+    d.className = 'langtog';
+    d.innerHTML = '<button data-l="en">EN</button><button data-l="es">ES</button>';
+    nav.appendChild(d);
+    d.querySelectorAll('button').forEach(b => {
+      b.onclick = () => setLang(b.dataset.l);
+    });
+  }
+  applyLang();
+})();
+
 </script>
 </body>
 </html>

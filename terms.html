@@ -117,9 +117,20 @@
   .sec li{padding:4px 0;font-size:15px}
   .sec li::marker{color:var(--teal)}
   .updated{color:var(--muted);font-size:13px;margin-bottom:20px}
-  .back-top{position:fixed;right:20px;bottom:20px;z-index:30;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--teal);border-radius:50%;background:var(--raised);color:var(--teal);font-size:22px;font-weight:700;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s}
-  .back-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
-  .back-top:hover{background:var(--teal);color:#06202E}
+
+  .langtog{
+    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
+    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
+  }
+  .langtog button{
+    font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
+    background:transparent;color:var(--muted);transition:.14s;
+  }
+  .langtog button:hover{color:var(--teal)}
+  .langtog button.on{background:var(--teal);color:#06202E}
+  .nav-in{align-items:center}
+
 </style>
 </head>
 <body>
@@ -228,8 +239,11 @@ const SECTIONS = [
   'Questions go to the <a href="contact.html" style="color:var(--coral)">contact page</a> or to staff in Discord.'
  ]}
 ];
+function drawSections(){
 document.getElementById("body").innerHTML = SECTIONS.map(s => '<div class="sec"><h3>' + esc(s.h) + '</h3>' + s.p.map(x => '<p>' + x + '</p>').join("") + '</div>').join("");
 document.getElementById("updated").textContent = "Last updated: " + UPDATED;
+}
+drawSections();
 
 document.querySelectorAll('.js-discord').forEach(a => { a.href = DISCORD_INVITE; });
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -275,15 +289,145 @@ document.getElementById('year').textContent = new Date().getFullYear();
     'related marks belong to their respective owners.</div>';
 
   f.insertAdjacentHTML('beforeend', social + contact + legal + disc);
-})();</script>
-<button class="back-top" type="button" aria-label="Back to top" title="Back to top">&#8593;</button>
-<script>
-  (function(){
-    var button=document.querySelector('.back-top');
-    if(!button)return;
-    window.addEventListener('scroll',function(){button.classList.toggle('show',window.scrollY>400)},{passive:true});
-    button.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
-  }());
+})();
+/* ---------- Spanish strings ---------- */
+const STR = {
+ "Next up": "Próximos",
+ "News": "Noticias",
+ "Schedule": "Calendario",
+ "Standings": "Clasificación",
+ "Stats": "Estadísticas",
+ "Rules": "Reglas",
+ "FAQ": "Preguntas",
+ "Contact": "Contacto",
+ "Tools": "Herramientas",
+ "Join": "Únete",
+ "Home": "Inicio",
+ "Privacy": "Privacidad",
+ "Terms": "Términos",
+ "CaribbeanFye Official": "CaribbeanFye Official",
+ "Competitive Dunk City Dynasty ·": "Dunk City Dynasty competitivo ·",
+ "Discord": "Discord",
+ "TikTok": "TikTok",
+ "YouTube": "YouTube",
+ "Instagram": "Instagram",
+ "X": "X",
+ "Twitch": "Twitch",
+ "Replies within 48 hours": "Respondemos en menos de 48 horas",
+ "CaribbeanFye is an independent community organisation. Not affiliated with, endorsed by, or sponsored by NetEase, the NBA, the NBPA, or any other rights holder. Dunk City Dynasty and all related marks belong to their respective owners.": "CaribbeanFye es una organización comunitaria independiente. No está afiliada, respaldada ni patrocinada por NetEase, la NBA, la NBPA ni ningún otro titular de derechos. Dunk City Dynasty y todas las marcas relacionadas pertenecen a sus respectivos dueños.",
+ "Join the Discord": "Únete al Discord",
+ "See the schedule": "Ver el calendario",
+ "Full ruleset": "Reglamento completo",
+ "Common questions": "Preguntas frecuentes",
+ "Read the rules first": "Lee las reglas primero",
+ "Back to home": "Volver al inicio",
+ "Register a team": "Registra un equipo",
+ "Register as a free agent": "Regístrate como agente libre",
+ "The terms for competing in CaribbeanFye events.": "Los términos para competir en los eventos de CaribbeanFye.",
+ "Who we are": "Quiénes somos",
+ "Taking part": "Participación",
+ "Entry and prizes": "Inscripción y premios",
+ "Results": "Resultados",
+ "Predictions": "Predicciones",
+ "Content": "Contenido",
+ "Availability": "Disponibilidad",
+ "Changes to these terms": "Cambios en estos términos",
+ "CaribbeanFye is an independent community organisation running competitive events for Dunk City Dynasty and other games.": "CaribbeanFye es una organización comunitaria independiente que organiza eventos competitivos de Dunk City Dynasty y otros juegos.",
+ "We are not affiliated with, endorsed by, or sponsored by NetEase, the NBA, the NBPA, or any other rights holder. All game trademarks belong to their owners.": "No estamos afiliados, respaldados ni patrocinados por NetEase, la NBA, la NBPA ni ningún otro titular de derechos. Todas las marcas del juego pertenecen a sus dueños.",
+ "You must be 18 or older to register or compete.": "Debes tener 18 años o más para registrarte o competir.",
+ "We may refuse or remove any participant whose conduct damages the community. That decision sits with league staff.": "Podemos rechazar o expulsar a cualquier participante cuya conducta dañe a la comunidad. Esa decisión corresponde al staff de la liga.",
+ "Events are currently free to enter. Any prize is stated before the event begins.": "Por ahora los eventos son gratuitos. Cualquier premio se indica antes de que empiece el evento.",
+ "If paid entry is introduced, the fee, the prize, and the refund terms will be published before signups open.": "Si se introduce inscripción de pago, la cuota, el premio y las condiciones de reembolso se publicarán antes de abrir inscripciones.",
+ "Prizes are paid to the registered team captain unless stated otherwise. How a team divides a prize internally is between the team and its members.": "Los premios se pagan al capitán registrado salvo que se indique otra cosa. Cómo reparte un equipo el premio internamente es asunto del equipo y sus miembros.",
+ "We are not party to any agreement between an organisation and its players.": "No somos parte de ningún acuerdo entre una organización y sus jugadores.",
+ "Results are decided by the reported screenshot and, where disputed, by the league recording.": "Los resultados se deciden por la captura reportada y, en caso de disputa, por la grabación de la liga.",
+ "Staff decisions on disputes are final for that event. Repeated or serious matters can be appealed through a ticket.": "Las decisiones del staff sobre disputas son definitivas para ese evento. Los casos repetidos o graves se pueden apelar por ticket.",
+ "The prediction system uses community currency with no cash value.": "El sistema de predicciones usa moneda comunitaria sin valor en efectivo.",
+ "It cannot be bought, sold, exchanged, or converted into anything of value.": "No se puede comprar, vender, intercambiar ni convertir en nada de valor.",
+ "It is a game within the community, not a wagering product.": "Es un juego dentro de la comunidad, no un producto de apuestas.",
+ "By competing you agree that we may record, stream, and publish footage of your matches for league content.": "Al competir aceptas que podamos grabar, transmitir y publicar imágenes de tus partidos como contenido de la liga.",
+ "You keep ownership of anything you create. Posting it in our channels gives us permission to share it with credit.": "Conservas la propiedad de lo que crees. Publicarlo en nuestros canales nos da permiso para compartirlo dándote crédito.",
+ "Do not post content you do not have the right to post.": "No publiques contenido sobre el que no tengas derechos.",
+ "This site and these events are provided as they are. We run them as carefully as we can, but we cannot promise uninterrupted service.": "Este sitio y estos eventos se ofrecen tal como están. Los gestionamos con el mayor cuidado posible, pero no podemos prometer un servicio ininterrumpido.",
+ "Schedules, formats, and structures may change between seasons. Changes are announced before they take effect.": "Los calendarios, formatos y estructuras pueden cambiar entre temporadas. Los cambios se anuncian antes de entrar en vigor.",
+ "We may update these terms. Material changes are announced in the announcements channel.": "Podemos actualizar estos términos. Los cambios importantes se anuncian en el canal de anuncios."
+};
+function renderAll(){ drawSections(); }
+
+/* =========================================================
+   LANGUAGE TOGGLE
+
+   Every visible English string has a Spanish counterpart in
+   the STR map below. Switching walks the page and swaps them.
+
+   To fix a translation: find the English line on the left,
+   change the Spanish on the right. Nothing else.
+   ========================================================= */
+
+let LANG = 'en';
+try{ LANG = localStorage.getItem('cf_lang') || 'en'; }catch(e){}
+
+function tr(s){
+  if(LANG === 'en') return s;
+  const k = String(s).trim();
+  return (STR[k] !== undefined) ? STR[k] : s;
+}
+
+/* swaps whole text nodes, so partial matches cannot corrupt anything */
+function walkTranslate(root, back){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+  const jobs = [];
+  while(w.nextNode()){
+    const n = w.currentNode;
+    const raw = n.nodeValue;
+    const t = raw.trim();
+    if(!t) continue;
+    if(n.parentElement && /SCRIPT|STYLE/.test(n.parentElement.tagName)) continue;
+
+    let out = null;
+    if(!back){
+      if(!n.__en) n.__en = t;
+      if(STR[n.__en] !== undefined) out = STR[n.__en];
+    } else if(n.__en){
+      out = n.__en;
+    }
+    if(out !== null && out !== undefined){
+      jobs.push([n, raw.replace(t, out)]);
+    }
+  }
+  jobs.forEach(j => { j[0].nodeValue = j[1]; });
+}
+
+function applyLang(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('.langtog button').forEach(b => {
+    b.classList.toggle('on', b.dataset.l === LANG);
+  });
+  /* re-render anything JS builds, then swap the static text */
+  if(typeof renderAll === 'function') renderAll();
+  walkTranslate(document.body, LANG === 'en');
+}
+
+function setLang(l){
+  LANG = l;
+  try{ localStorage.setItem('cf_lang', l); }catch(e){}
+  applyLang();
+}
+
+(function(){
+  const nav = document.querySelector('.nav-in');
+  if(nav){
+    const d = document.createElement('div');
+    d.className = 'langtog';
+    d.innerHTML = '<button data-l="en">EN</button><button data-l="es">ES</button>';
+    nav.appendChild(d);
+    d.querySelectorAll('button').forEach(b => {
+      b.onclick = () => setLang(b.dataset.l);
+    });
+  }
+  applyLang();
+})();
+
 </script>
 </body>
 </html>
