@@ -119,9 +119,20 @@
     border-left:3px solid var(--coral);border-radius:4px;
     padding:15px 18px;margin-bottom:20px;font-size:14.5px;color:var(--sand)}
   .note strong{color:var(--coral)}
-  .back-top{position:fixed;right:20px;bottom:20px;z-index:30;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--teal);border-radius:50%;background:var(--raised);color:var(--teal);font-size:22px;font-weight:700;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s}
-  .back-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
-  .back-top:hover{background:var(--teal);color:#06202E}
+
+  .langtog{
+    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
+    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
+  }
+  .langtog button{
+    font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
+    background:transparent;color:var(--muted);transition:.14s;
+  }
+  .langtog button:hover{color:var(--teal)}
+  .langtog button.on{background:var(--teal);color:#06202E}
+  .nav-in{align-items:center}
+
 </style>
 </head>
 <body>
@@ -266,10 +277,13 @@ const RULES = [
 ];
 /* ========================================================= */
 
+function drawRules(){
 document.getElementById('rules').innerHTML = RULES.map(sec =>
   '<div class="rule-sec"><h3>' + esc(sec.h) + '</h3><ol>' +
   sec.items.map(i => '<li>' + esc(i) + '</li>').join('') +
   '</ol></div>').join('');
+}
+drawRules();
 
 function esc(s){
   return String(s).replace(/[&<>"']/g, c => ({
@@ -323,15 +337,187 @@ document.getElementById('year').textContent = new Date().getFullYear();
   f.insertAdjacentHTML('beforeend', social + contact + legal + disc);
 })();
 
-</script>
-<button class="back-top" type="button" aria-label="Back to top" title="Back to top">&#8593;</button>
-<script>
-  (function(){
-    var button=document.querySelector('.back-top');
-    if(!button)return;
-    window.addEventListener('scroll',function(){button.classList.toggle('show',window.scrollY>400)},{passive:true});
-    button.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
-  }());
+
+/* ---------- Spanish strings ---------- */
+const STR = {
+ "Next up": "Próximos",
+ "News": "Noticias",
+ "Schedule": "Calendario",
+ "Standings": "Clasificación",
+ "Stats": "Estadísticas",
+ "Rules": "Reglas",
+ "FAQ": "Preguntas",
+ "Contact": "Contacto",
+ "Tools": "Herramientas",
+ "Join": "Únete",
+ "Home": "Inicio",
+ "Privacy": "Privacidad",
+ "Terms": "Términos",
+ "CaribbeanFye Official": "CaribbeanFye Official",
+ "Competitive Dunk City Dynasty ·": "Dunk City Dynasty competitivo ·",
+ "Discord": "Discord",
+ "TikTok": "TikTok",
+ "YouTube": "YouTube",
+ "Instagram": "Instagram",
+ "X": "X",
+ "Twitch": "Twitch",
+ "Replies within 48 hours": "Respondemos en menos de 48 horas",
+ "CaribbeanFye is an independent community organisation. Not affiliated with, endorsed by, or sponsored by NetEase, the NBA, the NBPA, or any other rights holder. Dunk City Dynasty and all related marks belong to their respective owners.": "CaribbeanFye es una organización comunitaria independiente. No está afiliada, respaldada ni patrocinada por NetEase, la NBA, la NBPA ni ningún otro titular de derechos. Dunk City Dynasty y todas las marcas relacionadas pertenecen a sus respectivos dueños.",
+ "Join the Discord": "Únete al Discord",
+ "See the schedule": "Ver el calendario",
+ "Full ruleset": "Reglamento completo",
+ "Common questions": "Preguntas frecuentes",
+ "Read the rules first": "Lee las reglas primero",
+ "Back to home": "Volver al inicio",
+ "Register a team": "Registra un equipo",
+ "Register as a free agent": "Regístrate como agente libre",
+ "The full ruleset. Accepting these in Discord is required before you can post.": "El reglamento completo. Debes aceptarlo en Discord antes de poder publicar.",
+ "Short version:": "Versión corta:",
+ "be 18, one team per player, winning captain posts the screenshot, fifteen minute no-show clock, and do not be the reason someone stops playing. Everything below is the detail.": "tener 18 años, un equipo por jugador, el capitán ganador publica la captura, reloj de quince minutos por incomparecencia, y no seas el motivo por el que alguien deja de jugar. Abajo están los detalles.",
+ "Last updated: September 2026": "Última actualización: septiembre de 2026",
+ "Eligibility": "Elegibilidad",
+ "Match play": "Desarrollo de los partidos",
+ "Reporting results": "Reporte de resultados",
+ "Conduct": "Conducta",
+ "Competitive integrity": "Integridad competitiva",
+ "Standings and tiebreakers": "Clasificación y desempates",
+ "Promotion and relegation": "Ascenso y descenso",
+ "Rosters and transfers": "Plantillas y traspasos",
+ "Franchises": "Franquicias",
+ "Predictions": "Predicciones",
+ "All players must be 18 years of age or older.": "Todos los jugadores deben tener 18 años o más.",
+ "A player may be rostered to one team only. No dual rosters.": "Un jugador solo puede estar en una plantilla. Nada de dobles inscripciones.",
+ "Every player must be in the CaribbeanFye Discord and have accepted the rules.": "Todo jugador debe estar en el Discord de CaribbeanFye y haber aceptado las reglas.",
+ "Teams are five players minimum: three active and two substitutes.": "Los equipos son de cinco jugadores como mínimo: tres activos y dos suplentes.",
+ "In-game names and Discord handles must both be registered so results can be verified.": "Hay que registrar tanto el nombre en el juego como el usuario de Discord para poder verificar resultados.",
+ "Season matches run Saturdays at 6:00 PM Central. Tournaments run Fridays at 7:00 PM Central.": "Los partidos de temporada son los sábados a las 6:00 PM hora central. Los torneos son los viernes a las 7:00 PM hora central.",
+ "Captains agree on a start time within the scheduled block. If they cannot agree, both teams take a no contest.": "Los capitanes acuerdan la hora de inicio dentro del bloque programado. Si no se ponen de acuerdo, ambos equipos reciben un sin resultado.",
+ "Lineups lock per game, not per series. Any rostered player may be swapped in between games.": "Las alineaciones se fijan por partido, no por serie. Cualquier jugador inscrito puede entrar entre partidos.",
+ "A team that has not appeared fifteen minutes after the agreed start forfeits that match.": "El equipo que no aparezca quince minutos después de la hora acordada pierde ese partido.",
+ "Disconnects: if a player drops before either team reaches 10 points, the game restarts with the same lineups. After that threshold, play continues short-handed and the team may substitute at the next stoppage.": "Desconexiones: si un jugador se cae antes de que algún equipo llegue a 10 puntos, el partido se reinicia con las mismas alineaciones. Pasado ese punto, se sigue jugando con menos y el equipo puede sustituir en la siguiente pausa.",
+ "If the game itself goes down or a server-wide fault occurs, the game restarts regardless of score.": "Si el juego se cae o hay una falla general del servidor, el partido se reinicia sin importar el marcador.",
+ "A team may claim a restart for connection reasons twice per season. After that, play continues.": "Un equipo puede pedir reinicio por problemas de conexión dos veces por temporada. Después de eso, se sigue jugando.",
+ "The winning team captain posts a screenshot of the final screen in the results channel.": "El capitán del equipo ganador publica una captura de la pantalla final en el canal de resultados.",
+ "No screenshot, no result.": "Sin captura, no hay resultado.",
+ "A captain who fails to report is sanctioned administratively, not competitively: first offence is a warning, second is a one match captain suspension, third is a franchise disciplinary point. Results are never altered over a reporting failure.": "El capitán que no reporte recibe una sanción administrativa, no competitiva: la primera vez es advertencia, la segunda es suspensión del capitán por un partido, la tercera es un punto disciplinario para la franquicia. Los resultados nunca se alteran por un fallo de reporte.",
+ "If neither captain reports, staff resolve the match from the league recording.": "Si ningún capitán reporta, el staff resuelve el partido con la grabación de la liga.",
+ "Only Team Captains and above may post in the results channel.": "Solo los capitanes y roles superiores pueden publicar en el canal de resultados.",
+ "Every match is recorded by the league. That recording settles any disputed result.": "La liga graba todos los partidos. Esa grabación resuelve cualquier resultado en disputa.",
+ "Harassment of any kind is zero tolerance and results in immediate removal.": "El acoso de cualquier tipo es cero tolerancia y resulta en expulsión inmediata.",
+ "Slurs, targeted abuse, and threats are not warnings. They are bans.": "Los insultos discriminatorios, el abuso dirigido y las amenazas no son advertencias. Son expulsiones.",
+ "Trash talk is fine. Making the server unpleasant is not.": "Hablar basura está bien. Hacer el servidor desagradable no.",
+ "Disputes go in a ticket, not in general chat.": "Las disputas van en un ticket, no en el chat general.",
+ "Staff decisions are logged. If you think one was wrong, open a ticket and say why.": "Las decisiones del staff quedan registradas. Si crees que una estuvo mal, abre un ticket y explica por qué.",
+ "Deliberately losing a match is grounds for a one season ban from play.": "Perder un partido a propósito es motivo de expulsión de una temporada completa.",
+ "Betting on a match you are playing in is not permitted.": "No se permite apostar en un partido en el que juegas.",
+ "We act on evidence, not suspicion. League recordings are the standard.": "Actuamos con pruebas, no con sospechas. Las grabaciones de la liga son el estándar.",
+ "An organization with multiple banned players loses its season slot.": "Una organización con varios jugadores expulsados pierde su plaza de temporada.",
+ "Penalties follow people, not organization names. Reforming under a new name does not clear a ban.": "Las sanciones siguen a las personas, no a los nombres de las organizaciones. Reformarse con otro nombre no borra una expulsión.",
+ "Teams are ranked by win percentage.": "Los equipos se ordenan por porcentaje de victorias.",
+ "Ties are broken in this order: head to head record, then game differential, then total point differential, then a single tiebreak match.": "Los empates se rompen en este orden: enfrentamiento directo, luego diferencia de partidos, luego diferencia total de puntos, y finalmente un partido de desempate.",
+ "A tiebreak match is only played when a placement affects the top four or the bottom four.": "Solo se juega partido de desempate cuando la posición afecta a los cuatro primeros o a los cuatro últimos.",
+ "Team name is never used to break a tie.": "El nombre del equipo nunca se usa para romper un empate.",
+ "A no contest counts as a played game for neither team and does not affect win percentage.": "Un sin resultado no cuenta como partido jugado para ninguno de los dos equipos y no afecta el porcentaje de victorias.",
+ "The bottom four franchises enter relegation at the end of each season. Entry fee is waived.": "Las cuatro últimas franquicias entran en descenso al final de cada temporada. La cuota de inscripción se exonera.",
+ "Four qualifier tournaments run in the offseason. Each produces one winner.": "Se juegan cuatro torneos clasificatorios en la pretemporada. Cada uno da un ganador.",
+ "Relegation matches are seeded: 5th plays Qualifier A winner, 6th plays Qualifier B, 7th plays Qualifier C, 8th plays Qualifier D.": "Los partidos de descenso se emparejan así: el 5º contra el ganador del Clasificatorio A, el 6º contra el B, el 7º contra el C y el 8º contra el D.",
+ "The winner of each relegation match takes the season slot.": "El ganador de cada partido de descenso se queda con la plaza de temporada.",
+ "A franchise that loses relegation keeps its Discord channels and may re-enter qualifiers next offseason.": "La franquicia que pierda el descenso conserva sus canales de Discord y puede volver a los clasificatorios la próxima pretemporada.",
+ "Organization personnel are unlimited. Owners, general managers, coaches, media staff and anyone else with a role in the org.": "El personal de la organización es ilimitado. Dueños, mánagers, entrenadores, personal de medios y cualquier otro con un puesto en la organización.",
+ "The competitive roster is capped at eight and must hold at least five.": "La plantilla competitiva tiene un tope de ocho y un mínimo de cinco.",
+ "Only players on the competitive roster may play league matches.": "Solo los jugadores de la plantilla competitiva pueden jugar partidos de liga.",
+ "Rosters lock at the start of the season. Transfers are permitted only during the mid-season transfer window.": "Las plantillas se cierran al inicio de la temporada. Los traspasos solo se permiten en la ventana de mitad de temporada.",
+ "A released player may sign with another franchise immediately, but not with a franchise they have already played for that season.": "Un jugador liberado puede fichar por otra franquicia de inmediato, pero no por una en la que ya jugó esa temporada.",
+ "Rosters lock again for the playoffs and for relegation. No additions after the lock.": "Las plantillas se cierran otra vez para los playoffs y el descenso. No se admiten altas después del cierre.",
+ "A franchise short of three available players may use one emergency substitute per season from the free agent list, with staff approval.": "Una franquicia que no llegue a tres jugadores disponibles puede usar un suplente de emergencia por temporada de la lista de agentes libres, con aprobación del staff.",
+ "A franchise is an organization holding a protected season slot, five players minimum.": "Una franquicia es una organización con una plaza de temporada protegida y un mínimo de cinco jugadores.",
+ "Competitive rosters are capped at eight. Organization personnel beyond that are unlimited.": "Las plantillas competitivas tienen un tope de ocho. El personal de la organización más allá de eso es ilimitado.",
+ "Slot protection lasts one season. The bottom four re-enter qualifiers with the entry fee waived.": "La protección de plaza dura una temporada. Los cuatro últimos vuelven a los clasificatorios con la cuota exonerada.",
+ "Franchises may be transferred with league approval. The league takes no cut.": "Las franquicias se pueden traspasar con aprobación de la liga. La liga no se lleva comisión.",
+ "Organizations are independent. The league is not party to any agreement between an org and its players.": "Las organizaciones son independientes. La liga no es parte de ningún acuerdo entre una organización y sus jugadores.",
+ "An org that takes winnings and does not pay its players is permanently removed, along with everyone involved.": "La organización que cobre premios y no pague a sus jugadores queda expulsada permanentemente, junto con todos los implicados.",
+ "Prediction currency has no cash value and cannot be exchanged for anything.": "La moneda de predicciones no tiene valor en efectivo y no se puede cambiar por nada.",
+ "Players may not place predictions on matches they are playing in.": "Los jugadores no pueden hacer predicciones en partidos en los que juegan.",
+ "Lines lock before lineups are announced.": "Las líneas se cierran antes de anunciar las alineaciones.",
+ "Prediction talk stays in its own channel, not in match coordination channels.": "Las conversaciones de predicciones se quedan en su canal, no en los canales de coordinación de partidos.",
+ "Blaming a player for a lost prediction is treated as harassment.": "Culpar a un jugador por una predicción perdida se trata como acoso."
+};
+function renderAll(){ drawRules(); }
+
+/* =========================================================
+   LANGUAGE TOGGLE
+
+   Every visible English string has a Spanish counterpart in
+   the STR map below. Switching walks the page and swaps them.
+
+   To fix a translation: find the English line on the left,
+   change the Spanish on the right. Nothing else.
+   ========================================================= */
+
+let LANG = 'en';
+try{ LANG = localStorage.getItem('cf_lang') || 'en'; }catch(e){}
+
+function tr(s){
+  if(LANG === 'en') return s;
+  const k = String(s).trim();
+  return (STR[k] !== undefined) ? STR[k] : s;
+}
+
+/* swaps whole text nodes, so partial matches cannot corrupt anything */
+function walkTranslate(root, back){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+  const jobs = [];
+  while(w.nextNode()){
+    const n = w.currentNode;
+    const raw = n.nodeValue;
+    const t = raw.trim();
+    if(!t) continue;
+    if(n.parentElement && /SCRIPT|STYLE/.test(n.parentElement.tagName)) continue;
+
+    let out = null;
+    if(!back){
+      if(!n.__en) n.__en = t;
+      if(STR[n.__en] !== undefined) out = STR[n.__en];
+    } else if(n.__en){
+      out = n.__en;
+    }
+    if(out !== null && out !== undefined){
+      jobs.push([n, raw.replace(t, out)]);
+    }
+  }
+  jobs.forEach(j => { j[0].nodeValue = j[1]; });
+}
+
+function applyLang(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('.langtog button').forEach(b => {
+    b.classList.toggle('on', b.dataset.l === LANG);
+  });
+  /* re-render anything JS builds, then swap the static text */
+  if(typeof renderAll === 'function') renderAll();
+  walkTranslate(document.body, LANG === 'en');
+}
+
+function setLang(l){
+  LANG = l;
+  try{ localStorage.setItem('cf_lang', l); }catch(e){}
+  applyLang();
+}
+
+(function(){
+  const nav = document.querySelector('.nav-in');
+  if(nav){
+    const d = document.createElement('div');
+    d.className = 'langtog';
+    d.innerHTML = '<button data-l="en">EN</button><button data-l="es">ES</button>';
+    nav.appendChild(d);
+    d.querySelectorAll('button').forEach(b => {
+      b.onclick = () => setLang(b.dataset.l);
+    });
+  }
+  applyLang();
+})();
+
 </script>
 </body>
 </html>

@@ -126,9 +126,20 @@
        text-transform:uppercase;color:var(--coral);margin:26px 0 11px}
   .cat:first-of-type{margin-top:0}
   .none{color:var(--muted);padding:30px 0;text-align:center;display:none}
-  .back-top{position:fixed;right:20px;bottom:20px;z-index:30;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--teal);border-radius:50%;background:var(--raised);color:var(--teal);font-size:22px;font-weight:700;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s}
-  .back-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
-  .back-top:hover{background:var(--teal);color:#06202E}
+
+  .langtog{
+    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
+    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
+  }
+  .langtog button{
+    font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
+    background:transparent;color:var(--muted);transition:.14s;
+  }
+  .langtog button:hover{color:var(--teal)}
+  .langtog button.on{background:var(--teal);color:#06202E}
+  .nav-in{align-items:center}
+
 </style>
 </head>
 <body>
@@ -332,15 +343,169 @@ document.getElementById('year').textContent = new Date().getFullYear();
   f.insertAdjacentHTML('beforeend', social + contact + legal + disc);
 })();
 
-</script>
-<button class="back-top" type="button" aria-label="Back to top" title="Back to top">&#8593;</button>
-<script>
-  (function(){
-    var button=document.querySelector('.back-top');
-    if(!button)return;
-    window.addEventListener('scroll',function(){button.classList.toggle('show',window.scrollY>400)},{passive:true});
-    button.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
-  }());
+
+/* ---------- Spanish strings ---------- */
+const STR = {
+ "Next up": "Próximos",
+ "News": "Noticias",
+ "Schedule": "Calendario",
+ "Standings": "Clasificación",
+ "Stats": "Estadísticas",
+ "Rules": "Reglas",
+ "FAQ": "Preguntas",
+ "Contact": "Contacto",
+ "Tools": "Herramientas",
+ "Join": "Únete",
+ "Home": "Inicio",
+ "Privacy": "Privacidad",
+ "Terms": "Términos",
+ "CaribbeanFye Official": "CaribbeanFye Official",
+ "Competitive Dunk City Dynasty ·": "Dunk City Dynasty competitivo ·",
+ "Discord": "Discord",
+ "TikTok": "TikTok",
+ "YouTube": "YouTube",
+ "Instagram": "Instagram",
+ "X": "X",
+ "Twitch": "Twitch",
+ "Replies within 48 hours": "Respondemos en menos de 48 horas",
+ "CaribbeanFye is an independent community organisation. Not affiliated with, endorsed by, or sponsored by NetEase, the NBA, the NBPA, or any other rights holder. Dunk City Dynasty and all related marks belong to their respective owners.": "CaribbeanFye es una organización comunitaria independiente. No está afiliada, respaldada ni patrocinada por NetEase, la NBA, la NBPA ni ningún otro titular de derechos. Dunk City Dynasty y todas las marcas relacionadas pertenecen a sus respectivos dueños.",
+ "Join the Discord": "Únete al Discord",
+ "See the schedule": "Ver el calendario",
+ "Full ruleset": "Reglamento completo",
+ "Common questions": "Preguntas frecuentes",
+ "Read the rules first": "Lee las reglas primero",
+ "Back to home": "Volver al inicio",
+ "Register a team": "Registra un equipo",
+ "Register as a free agent": "Regístrate como agente libre",
+ "Everything people ask most. Search it, or ask in the Discord.": "Lo que más nos preguntan. Búscalo aquí, o pregunta en el Discord.",
+ "Search the FAQ...": "Buscar en las preguntas...",
+ "Nothing matches that. Try a different word, or ask in the Discord.": "No hay coincidencias. Prueba otra palabra, o pregunta en el Discord.",
+ "Getting started": "Para empezar",
+ "Tournaments": "Torneos",
+ "Results and disputes": "Resultados y disputas",
+ "Season and franchises": "Temporada y franquicias",
+ "Community": "Comunidad",
+ "How do I join?": "¿Cómo me uno?",
+ "Join the Discord, read and accept the rules, then answer the onboarding questions. That gets you into the community channels straight away.": "Únete al Discord, lee y acepta las reglas, y responde las preguntas de bienvenida. Con eso entras a los canales de la comunidad de inmediato.",
+ "Does it cost anything?": "¿Cuesta algo?",
+ "No. Tournaments are free to enter right now, and the first season is free as well. If that changes, it will be announced well in advance and you will know the price before you commit.": "No. Ahora mismo los torneos son gratis, y la primera temporada también. Si eso cambia, se anunciará con mucha antelación y sabrás el precio antes de comprometerte.",
+ "Do I need a team?": "¿Necesito un equipo?",
+ "To play in tournaments, yes. Teams are five players minimum, three active and two subs. If you do not have one, register as a free agent and post in the looking-for-team channel. Orgs check both.": "Para jugar torneos, sí. Los equipos son de cinco jugadores mínimo, tres activos y dos suplentes. Si no tienes, regístrate como agente libre y publica en el canal de búsqueda de equipo. Las organizaciones revisan ambos.",
+ "How old do I have to be?": "¿Qué edad necesito?",
+ "Eighteen or older. No exceptions.": "Dieciocho años o más. Sin excepciones.",
+ "What regions can play?": "¿Qué regiones pueden jugar?",
+ "Anyone can join the community. Tournaments are currently scheduled around North American evenings, so that is where competition is most practical right now.": "Cualquiera puede unirse a la comunidad. Los torneos están programados por ahora en horario de tarde-noche de Norteamérica, así que ahí es donde la competencia resulta más práctica.",
+ "When do tournaments run?": "¿Cuándo son los torneos?",
+ "Friday nights at 7:00 PM Central. Season matches are Saturdays at 6:00 PM Central. Weeknights are solo drafts and exhibitions.": "Viernes por la noche a las 7:00 PM hora central. Los partidos de temporada son los sábados a las 6:00 PM hora central. Entre semana hay drafts individuales y exhibiciones.",
+ "How do I sign my team up?": "¿Cómo inscribo a mi equipo?",
+ "Fill out the team registration form linked in the signups channel. Once we verify the roster you get your Team Captain and Player roles.": "Llena el formulario de registro de equipo que está en el canal de inscripciones. Cuando verifiquemos la plantilla recibes tus roles de Capitán y Jugador.",
+ "Can I change my lineup between games?": "¿Puedo cambiar la alineación entre partidos?",
+ "Yes. Lineups lock per game, not per tournament. A five man roster can rotate all five across a series so nobody sits the whole night.": "Sí. Las alineaciones se fijan por partido, no por torneo. Una plantilla de cinco puede rotar a los cinco durante una serie para que nadie se quede fuera toda la noche.",
+ "What happens if a team does not show?": "¿Qué pasa si un equipo no aparece?",
+ "Fifteen minute clock, then automatic forfeit. No discussion. Set your alarms.": "Reloj de quince minutos, luego derrota automática. Sin discusión. Pon tus alarmas.",
+ "How are brackets seeded?": "¿Cómo se siembran los brackets?",
+ "Standard seeding, so the top seed plays the bottom seed and strong teams cannot meet before the later rounds. If there are no standings yet, it is a random draw.": "Siembra estándar, así el primer sembrado juega contra el último y los equipos fuertes no se cruzan hasta rondas avanzadas. Si todavía no hay clasificación, es sorteo aleatorio.",
+ "How do results get reported?": "¿Cómo se reportan los resultados?",
+ "The winning team captain posts a screenshot of the final screen in the results channel. No screenshot, no result. If a captain does not post, that team forfeits their next match.": "El capitán del equipo ganador publica una captura de la pantalla final en el canal de resultados. Sin captura, no hay resultado. Si un capitán no publica, se aplica una sanción administrativa.",
+ "What if we disagree on a result?": "¿Y si no estamos de acuerdo con un resultado?",
+ "Every match is recorded by the league. That recording is the tiebreaker. Open a dispute ticket and we will check the footage.": "La liga graba todos los partidos. Esa grabación es lo que decide. Abre un ticket de disputa y revisamos el video.",
+ "Someone is cheating or being toxic. What do I do?": "Alguien está haciendo trampa o siendo tóxico. ¿Qué hago?",
+ "Open a ticket in the disputes channel with whatever evidence you have. Harassment is zero tolerance.": "Abre un ticket en el canal de disputas con las pruebas que tengas. El acoso es cero tolerancia.",
+ "Why can only captains post results?": "¿Por qué solo los capitanes publican resultados?",
+ "It keeps the results channel clean and gives one clear person accountable per team. Everyone else can read it.": "Mantiene limpio el canal de resultados y deja a una persona responsable por equipo. Los demás pueden leerlo.",
+ "What is a franchise?": "¿Qué es una franquicia?",
+ "An organization holding a protected slot in the season. Minimum five players, no upper limit as long as everyone has a job title. Franchises get a protected season slot, a vote on season changes, and their own channels.": "Una organización con una plaza protegida en la temporada. Mínimo cinco jugadores. La plantilla competitiva tiene tope de ocho, pero el personal de la organización es ilimitado. Las franquicias tienen plaza protegida, voto en los cambios de temporada y sus propios canales.",
+ "How do I get a franchise slot?": "¿Cómo consigo una plaza de franquicia?",
+ "Win one of the qualifier tournaments. Slots for the first season are free.": "Gana uno de los torneos clasificatorios. Las plazas de la primera temporada son gratis.",
+ "Can a franchise lose its slot?": "¿Una franquicia puede perder su plaza?",
+ "Yes. Slot protection lasts one season. The bottom four teams re-enter the qualifiers, entry fee waived, and play a qualifier winner to keep their place.": "Sí. La protección dura una temporada. Los cuatro últimos equipos vuelven a los clasificatorios, con la cuota exonerada, y juegan contra un ganador de clasificatorio para conservar su lugar.",
+ "Can I be on two teams?": "¿Puedo estar en dos equipos?",
+ "No. One team per player. We check every roster against the others before verifying, and doubling up gets both rosters flagged.": "No. Un equipo por jugador. Revisamos cada plantilla contra las demás antes de verificar, y estar en dos marca a ambas plantillas.",
+ "Can a franchise be sold or transferred?": "¿Se puede vender o traspasar una franquicia?",
+ "With league approval, yes. The league does not take a cut.": "Con aprobación de la liga, sí. La liga no se lleva comisión.",
+ "Do you only play Dunk City Dynasty?": "¿Solo juegan Dunk City Dynasty?",
+ "DCD is the competitive side, but the server has channels for other mobile games and a general lounge. Grab the ping roles for whatever you play.": "DCD es la parte competitiva, pero el servidor tiene canales para otros juegos móviles y una sala general. Toma los roles de aviso de lo que juegues.",
+ "How do I get pinged for tournaments?": "¿Cómo me avisan de los torneos?",
+ "Pick up the Tournament Ping role during onboarding or in the roles channel. We do not ping the whole server for events.": "Toma el rol de aviso de torneos en la bienvenida o en el canal de roles. No mencionamos a todo el servidor por cada evento.",
+ "Can I help run things?": "¿Puedo ayudar a organizar?",
+ "Eventually, yes. Staff comes from people already active and helpful in the server. Stick around, be useful, and it tends to sort itself out.": "Con el tiempo, sí. El staff sale de gente que ya está activa y ayuda en el servidor. Quédate, sé útil, y se acomoda solo."
+};
+function renderAll(){ renderFAQ(document.getElementById('q') ? document.getElementById('q').value : ''); }
+
+/* =========================================================
+   LANGUAGE TOGGLE
+
+   Every visible English string has a Spanish counterpart in
+   the STR map below. Switching walks the page and swaps them.
+
+   To fix a translation: find the English line on the left,
+   change the Spanish on the right. Nothing else.
+   ========================================================= */
+
+let LANG = 'en';
+try{ LANG = localStorage.getItem('cf_lang') || 'en'; }catch(e){}
+
+function tr(s){
+  if(LANG === 'en') return s;
+  const k = String(s).trim();
+  return (STR[k] !== undefined) ? STR[k] : s;
+}
+
+/* swaps whole text nodes, so partial matches cannot corrupt anything */
+function walkTranslate(root, back){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+  const jobs = [];
+  while(w.nextNode()){
+    const n = w.currentNode;
+    const raw = n.nodeValue;
+    const t = raw.trim();
+    if(!t) continue;
+    if(n.parentElement && /SCRIPT|STYLE/.test(n.parentElement.tagName)) continue;
+
+    let out = null;
+    if(!back){
+      if(!n.__en) n.__en = t;
+      if(STR[n.__en] !== undefined) out = STR[n.__en];
+    } else if(n.__en){
+      out = n.__en;
+    }
+    if(out !== null && out !== undefined){
+      jobs.push([n, raw.replace(t, out)]);
+    }
+  }
+  jobs.forEach(j => { j[0].nodeValue = j[1]; });
+}
+
+function applyLang(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('.langtog button').forEach(b => {
+    b.classList.toggle('on', b.dataset.l === LANG);
+  });
+  /* re-render anything JS builds, then swap the static text */
+  if(typeof renderAll === 'function') renderAll();
+  walkTranslate(document.body, LANG === 'en');
+}
+
+function setLang(l){
+  LANG = l;
+  try{ localStorage.setItem('cf_lang', l); }catch(e){}
+  applyLang();
+}
+
+(function(){
+  const nav = document.querySelector('.nav-in');
+  if(nav){
+    const d = document.createElement('div');
+    d.className = 'langtog';
+    d.innerHTML = '<button data-l="en">EN</button><button data-l="es">ES</button>';
+    nav.appendChild(d);
+    d.querySelectorAll('button').forEach(b => {
+      b.onclick = () => setLang(b.dataset.l);
+    });
+  }
+  applyLang();
+})();
+
 </script>
 </body>
 </html>

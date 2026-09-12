@@ -117,9 +117,20 @@
   .sec li{padding:4px 0;font-size:15px}
   .sec li::marker{color:var(--teal)}
   .updated{color:var(--muted);font-size:13px;margin-bottom:20px}
-  .back-top{position:fixed;right:20px;bottom:20px;z-index:30;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--teal);border-radius:50%;background:var(--raised);color:var(--teal);font-size:22px;font-weight:700;opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s}
-  .back-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
-  .back-top:hover{background:var(--teal);color:#06202E}
+
+  .langtog{
+    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
+    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
+  }
+  .langtog button{
+    font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;
+    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
+    background:transparent;color:var(--muted);transition:.14s;
+  }
+  .langtog button:hover{color:var(--teal)}
+  .langtog button.on{background:var(--teal);color:#06202E}
+  .nav-in{align-items:center}
+
 </style>
 </head>
 <body>
@@ -229,8 +240,11 @@ const SECTIONS = [
   'Questions about any of this go to the addresses on the <a href="contact.html" style="color:var(--coral)">contact page</a>, or to staff in Discord.'
  ]}
 ];
+function drawSections(){
 document.getElementById("body").innerHTML = SECTIONS.map(s => '<div class="sec"><h3>' + esc(s.h) + '</h3>' + s.p.map(x => '<p>' + x + '</p>').join("") + '</div>').join("");
 document.getElementById("updated").textContent = "Last updated: " + UPDATED;
+}
+drawSections();
 
 document.querySelectorAll('.js-discord').forEach(a => { a.href = DISCORD_INVITE; });
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -276,15 +290,150 @@ document.getElementById('year').textContent = new Date().getFullYear();
     'related marks belong to their respective owners.</div>';
 
   f.insertAdjacentHTML('beforeend', social + contact + legal + disc);
-})();</script>
-<button class="back-top" type="button" aria-label="Back to top" title="Back to top">&#8593;</button>
-<script>
-  (function(){
-    var button=document.querySelector('.back-top');
-    if(!button)return;
-    window.addEventListener('scroll',function(){button.classList.toggle('show',window.scrollY>400)},{passive:true});
-    button.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
-  }());
+})();
+/* ---------- Spanish strings ---------- */
+const STR = {
+ "Next up": "Próximos",
+ "News": "Noticias",
+ "Schedule": "Calendario",
+ "Standings": "Clasificación",
+ "Stats": "Estadísticas",
+ "Rules": "Reglas",
+ "FAQ": "Preguntas",
+ "Contact": "Contacto",
+ "Tools": "Herramientas",
+ "Join": "Únete",
+ "Home": "Inicio",
+ "Privacy": "Privacidad",
+ "Terms": "Términos",
+ "CaribbeanFye Official": "CaribbeanFye Official",
+ "Competitive Dunk City Dynasty ·": "Dunk City Dynasty competitivo ·",
+ "Discord": "Discord",
+ "TikTok": "TikTok",
+ "YouTube": "YouTube",
+ "Instagram": "Instagram",
+ "X": "X",
+ "Twitch": "Twitch",
+ "Replies within 48 hours": "Respondemos en menos de 48 horas",
+ "CaribbeanFye is an independent community organisation. Not affiliated with, endorsed by, or sponsored by NetEase, the NBA, the NBPA, or any other rights holder. Dunk City Dynasty and all related marks belong to their respective owners.": "CaribbeanFye es una organización comunitaria independiente. No está afiliada, respaldada ni patrocinada por NetEase, la NBA, la NBPA ni ningún otro titular de derechos. Dunk City Dynasty y todas las marcas relacionadas pertenecen a sus respectivos dueños.",
+ "Join the Discord": "Únete al Discord",
+ "See the schedule": "Ver el calendario",
+ "Full ruleset": "Reglamento completo",
+ "Common questions": "Preguntas frecuentes",
+ "Read the rules first": "Lee las reglas primero",
+ "Back to home": "Volver al inicio",
+ "Register a team": "Registra un equipo",
+ "Register as a free agent": "Regístrate como agente libre",
+ "What we collect, why, and what you can ask us to remove.": "Qué recopilamos, por qué, y qué puedes pedirnos que borremos.",
+ "Draft.": "Borrador.",
+ "This describes how CaribbeanFye actually handles information today. It is written in plain language rather than legal language, and it has not been reviewed by a lawyer. Have it looked at before you take paid entries or handle money.": "Esto describe cómo CaribbeanFye maneja la información hoy. Está escrito en lenguaje sencillo, no jurídico, y no lo ha revisado un abogado. Conviene que lo revise uno antes de cobrar inscripciones o manejar dinero.",
+ "Last updated: September 2026": "Última actualización: septiembre de 2026",
+ "What we collect": "Qué recopilamos",
+ "What we do not collect": "Qué no recopilamos",
+ "Why we collect it": "Por qué lo recopilamos",
+ "Where it lives": "Dónde se guarda",
+ "Who can see it": "Quién puede verlo",
+ "Age": "Edad",
+ "Your choices": "Tus opciones",
+ "Changes": "Cambios",
+ "When you register a team or sign up as a free agent, we collect your Discord username, your in-game name, your region, your availability, and your confirmation that you are 18 or older.": "Cuando registras un equipo o te apuntas como agente libre, recopilamos tu usuario de Discord, tu nombre en el juego, tu región, tu disponibilidad y tu confirmación de que tienes 18 años o más.",
+ "When you join the Discord server, Discord itself holds your account information under its own privacy policy. We see your username, your roles, and anything you post in the server.": "Cuando entras al servidor de Discord, Discord guarda la información de tu cuenta bajo su propia política de privacidad. Nosotros vemos tu usuario, tus roles y lo que publicas en el servidor.",
+ "We record match sessions for dispute resolution and for content. Those recordings show in-game names and gameplay, not personal information.": "Grabamos los partidos para resolver disputas y para contenido. Esas grabaciones muestran nombres en el juego y jugadas, no información personal.",
+ "We do not collect email addresses through our signup forms.": "No recopilamos correos electrónicos en nuestros formularios de inscripción.",
+ "We do not collect payment information. We do not process payments.": "No recopilamos datos de pago. No procesamos pagos.",
+ "We do not use tracking cookies or advertising networks on this site.": "No usamos cookies de seguimiento ni redes publicitarias en este sitio.",
+ "To verify that a roster is eligible, that every player is 18 or older, and that nobody is signed to two teams at once.": "Para verificar que una plantilla es elegible, que cada jugador tiene 18 años o más, y que nadie está en dos equipos a la vez.",
+ "To assign the right roles in Discord and schedule matches.": "Para asignar los roles correctos en Discord y programar partidos.",
+ "To confirm results, since screenshots show in-game names and we need to match those to registered players.": "Para confirmar resultados, porque las capturas muestran nombres en el juego y hay que relacionarlos con jugadores registrados.",
+ "Signup responses are stored in Google Forms and Google Sheets, subject to Google's privacy policy.": "Las respuestas de inscripción se guardan en Google Forms y Google Sheets, sujetas a la política de privacidad de Google.",
+ "Community activity lives in Discord, subject to Discord's privacy policy.": "La actividad de la comunidad vive en Discord, sujeta a la política de privacidad de Discord.",
+ "Match recordings are stored by the league and are not published in full without reason.": "Las grabaciones de partidos las guarda la liga y no se publican completas sin motivo.",
+ "In-game names, team names, and results are public within the community. That is the nature of a competitive league.": "Los nombres en el juego, los nombres de equipo y los resultados son públicos dentro de la comunidad. Es la naturaleza de una liga competitiva.",
+ "Discord usernames and availability are visible to league staff.": "Los usuarios de Discord y la disponibilidad son visibles para el staff de la liga.",
+ "We do not sell, rent, or share your information with third parties for marketing.": "No vendemos, alquilamos ni compartimos tu información con terceros con fines publicitarios.",
+ "This community is for people aged 18 and over. We do not knowingly collect information from anyone under 18.": "Esta comunidad es para mayores de 18 años. No recopilamos a sabiendas información de menores de 18.",
+ "If you believe someone under 18 has registered, contact us and we will remove them and their data.": "Si crees que un menor de 18 se registró, contáctanos y lo eliminaremos junto con sus datos.",
+ "You can ask us to remove your registration and your data at any time. Contact us and we will do it.": "Puedes pedirnos que borremos tu registro y tus datos en cualquier momento. Contáctanos y lo hacemos.",
+ "Leaving the Discord server removes your access but does not automatically delete past messages or registration records. Ask if you want those removed too.": "Salir del servidor de Discord quita tu acceso pero no borra automáticamente mensajes antiguos ni registros de inscripción. Pídelo si también quieres que se eliminen.",
+ "Match results and standings from completed seasons are part of the competitive record and are generally kept.": "Los resultados y clasificaciones de temporadas terminadas son parte del registro competitivo y normalmente se conservan.",
+ "If this policy changes in a way that matters, we will say so in the announcements channel rather than quietly editing this page.": "Si esta política cambia de forma importante, lo diremos en el canal de anuncios en vez de editar esta página en silencio."
+};
+function renderAll(){ drawSections(); }
+
+/* =========================================================
+   LANGUAGE TOGGLE
+
+   Every visible English string has a Spanish counterpart in
+   the STR map below. Switching walks the page and swaps them.
+
+   To fix a translation: find the English line on the left,
+   change the Spanish on the right. Nothing else.
+   ========================================================= */
+
+let LANG = 'en';
+try{ LANG = localStorage.getItem('cf_lang') || 'en'; }catch(e){}
+
+function tr(s){
+  if(LANG === 'en') return s;
+  const k = String(s).trim();
+  return (STR[k] !== undefined) ? STR[k] : s;
+}
+
+/* swaps whole text nodes, so partial matches cannot corrupt anything */
+function walkTranslate(root, back){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+  const jobs = [];
+  while(w.nextNode()){
+    const n = w.currentNode;
+    const raw = n.nodeValue;
+    const t = raw.trim();
+    if(!t) continue;
+    if(n.parentElement && /SCRIPT|STYLE/.test(n.parentElement.tagName)) continue;
+
+    let out = null;
+    if(!back){
+      if(!n.__en) n.__en = t;
+      if(STR[n.__en] !== undefined) out = STR[n.__en];
+    } else if(n.__en){
+      out = n.__en;
+    }
+    if(out !== null && out !== undefined){
+      jobs.push([n, raw.replace(t, out)]);
+    }
+  }
+  jobs.forEach(j => { j[0].nodeValue = j[1]; });
+}
+
+function applyLang(){
+  document.documentElement.lang = LANG;
+  document.querySelectorAll('.langtog button').forEach(b => {
+    b.classList.toggle('on', b.dataset.l === LANG);
+  });
+  /* re-render anything JS builds, then swap the static text */
+  if(typeof renderAll === 'function') renderAll();
+  walkTranslate(document.body, LANG === 'en');
+}
+
+function setLang(l){
+  LANG = l;
+  try{ localStorage.setItem('cf_lang', l); }catch(e){}
+  applyLang();
+}
+
+(function(){
+  const nav = document.querySelector('.nav-in');
+  if(nav){
+    const d = document.createElement('div');
+    d.className = 'langtog';
+    d.innerHTML = '<button data-l="en">EN</button><button data-l="es">ES</button>';
+    nav.appendChild(d);
+    d.querySelectorAll('button').forEach(b => {
+      b.onclick = () => setLang(b.dataset.l);
+    });
+  }
+  applyLang();
+})();
+
 </script>
 </body>
 </html>
