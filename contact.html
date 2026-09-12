@@ -124,8 +124,9 @@
   .biz-table tr:last-child td{border-bottom:none}
 
   .langtog{
-    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
-    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
+    position:fixed;top:18px;right:22px;z-index:30;display:flex;gap:0;
+    border:1px solid var(--line);border-radius:3px;overflow:hidden;
+    background:var(--water);box-shadow:0 4px 14px rgba(0,0,0,.25);
   }
   .langtog button{
     font-family:'Barlow',sans-serif;font-size:11px;font-weight:700;
@@ -134,8 +135,6 @@
   }
   .langtog button:hover{color:var(--teal)}
   .langtog button.on{background:var(--teal);color:#06202E}
-  .nav-in{align-items:center}
-
 </style>
 </head>
 <body>
@@ -418,6 +417,7 @@ function walkTranslate(root, back){
     const t = raw.trim();
     if(!t) continue;
     if(n.parentElement && /SCRIPT|STYLE/.test(n.parentElement.tagName)) continue;
+    if(n.parentElement && n.parentElement.closest('.langtog')) continue;
 
     let out = null;
     if(!back){
@@ -450,12 +450,11 @@ function setLang(l){
 }
 
 (function(){
-  const nav = document.querySelector('.nav-in');
-  if(nav){
+  {
     const d = document.createElement('div');
     d.className = 'langtog';
     d.innerHTML = '<button data-l="en">EN</button><button data-l="es">ES</button>';
-    nav.appendChild(d);
+    document.body.appendChild(d);
     d.querySelectorAll('button').forEach(b => {
       b.onclick = () => setLang(b.dataset.l);
     });
