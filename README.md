@@ -7,6 +7,7 @@ Static CaribbeanFye tournament site pages:
 - `stats.html` - Player statistics
 - `rules.html` - Competition rules
 - `faq.html` - Frequently asked questions
+- `highlights.html` - League highlights
 - `contact.html` - Contact information
 - `privacy.html` - Privacy policy
 - `terms.html` - Terms of service
