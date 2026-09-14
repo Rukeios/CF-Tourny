@@ -7,16 +7,14 @@
    It keeps the public out of staff tools. It is not security.
    Nothing sensitive lives in this file either way.
 
-   TO CHANGE THE PASSWORD:
-     1. Unlock the page with the current password
-     2. Use the "Change password" box at the top
-     3. Copy the hash it gives you
-     4. Paste it over PASS_HASH below, save, re-upload
+   The password is changed only by editing this file and
+   deploying it. There is no password-change control in the
+   browser.
    ========================================================= */
 
-/* default password: caribbeanfye */
+/* default password: BigCARIB551 */
 let PASS_HASH =
-  "7dc3857fcee0d191ae6e1a3f901f145c600e3fbff37c4ffe32d6890094cf1475";
+  "202ed6f5adeacca431e02d9b54fd3d8880198a342f768b2be821b0a94cc7e891";
 
 
 /* --------------------------------------------------------
@@ -95,73 +93,11 @@ async function sha256(text){
 }
 
 
-/* --------------------------------------------------------
-   SECURITY QUESTION
-
-   Asked before any password change. Stops someone changing
-   the password on an unlocked machine.
-
-   The answer is normalised before hashing: lowercased,
-   trimmed, full stops removed, repeated spaces collapsed.
-   So capitalisation, trailing full stops and extra spaces
-   all still match.
-
-   TO CHANGE THE QUESTION OR ANSWER
-     1. Edit SECURITY_QUESTION below to whatever you want
-     2. Type the new answer into the box and press
-        "Hash an answer" to get its hash
-     3. Paste that over SECURITY_ANSWER_HASH
-   -------------------------------------------------------- */
-
-const SECURITY_QUESTION = "What is the name of my fourth son?";
-const SECURITY_ANSWER_HASH = "af2f38c7edb6f2cfdb8ac42a8af9e9ab682a2edfbd545a084b4885031494b919";
-
-function normAnswer(s){
-  return String(s).trim().toLowerCase()
-    .replace(/\./g, '')
-    .replace(/\s+/g, ' ');
-}
-
-async function checkAnswer(v){
-  const h = await sha256(normAnswer(v));
-  return h === SECURITY_ANSWER_HASH;
-}
-
-async function hashAnswer(){
-  const v = document.getElementById('pw-answer').value;
-  const out = document.getElementById('pw-out');
-  if(!v){ out.textContent = 'Type an answer first.'; return; }
-  const h = await sha256(normAnswer(v));
-  out.innerHTML = 'Hash for that answer. Paste it over '
-    + 'SECURITY_ANSWER_HASH in this file:<br><br>' + h;
-}
-
-/* a password set through the page lives here, per browser */
-function storedHash(){
-  try{ return localStorage.getItem('cf_pw'); }catch(e){ return null; }
-}
-function storeHash(h){
-  try{ localStorage.setItem('cf_pw', h); return true; }
-  catch(e){ return false; }
-}
-function clearStoredHash(){
-  try{ localStorage.removeItem('cf_pw'); }catch(e){}
-}
-function activeHash(){ return storedHash() || PASS_HASH; }
-
-
 function unlock(){
   document.getElementById('gate').style.display = 'none';
   document.body.classList.remove('locked');
   const shell = document.getElementById('app-shell');
   if(shell) shell.classList.remove('hidden');
-  const tool = document.getElementById('pwtool');
-  if(tool){
-    tool.style.display = 'block';
-    const ql = document.getElementById('secq-label');
-    if(ql) ql.textContent = SECURITY_QUESTION;
-  }
-  try{ sessionStorage.setItem('cf_ok','1'); }catch(e){}
   if(typeof boot === 'function') boot();
 }
 
@@ -174,7 +110,7 @@ async function tryUnlock(){
   let h;
   try{ h = await sha256(val); }
   catch(e){ err.textContent = 'Could not check the password.'; return; }
-  if(h === activeHash()){
+  if(h === PASS_HASH){
     err.textContent = '';
     unlock();
   } else {
@@ -184,79 +120,14 @@ async function tryUnlock(){
   }
 }
 
-async function setPassword(){
-  const pw  = document.getElementById('pw-new').value;
-  const ans = document.getElementById('pw-answer').value;
-  const out = document.getElementById('pw-out');
-
-  if(!pw){ out.textContent = 'Type a new password first.'; return; }
-  if(!ans){
-    out.innerHTML = '<strong style="color:#E0A24F">'
-      + 'Answer the security question before changing the password.'
-      + '</strong>';
-    document.getElementById('pw-answer').focus();
-    return;
-  }
-
-  let ok = false;
-  try{ ok = await checkAnswer(ans); }catch(e){}
-  if(!ok){
-    out.innerHTML = '<strong style="color:#E05A4A">'
-      + 'That is not the right answer. Password unchanged.</strong>';
-    document.getElementById('pw-answer').value = '';
-    return;
-  }
-
-  const h = await sha256(pw);
-  if(storeHash(h)){
-    out.innerHTML =
-      '<strong style="color:var(--teal)">Password changed on this browser.</strong>'
-      + '<br><br>To make it the default for everyone, paste this over '
-      + 'PASS_HASH in the file and re-upload:<br><br>' + h;
-  } else {
-    out.innerHTML = 'Could not save it here. Paste this over PASS_HASH '
-      + 'in the file instead:<br><br>' + h;
-  }
-  document.getElementById('pw-new').value = '';
-  document.getElementById('pw-answer').value = '';
-}
-
-async function resetPassword(){
-  const ans = document.getElementById('pw-answer').value;
-  const out = document.getElementById('pw-out');
-  if(!ans){
-    out.innerHTML = '<strong style="color:#E0A24F">'
-      + 'Answer the security question first.</strong>';
-    return;
-  }
-  let ok = false;
-  try{ ok = await checkAnswer(ans); }catch(e){}
-  if(!ok){
-    out.innerHTML = '<strong style="color:#E05A4A">'
-      + 'That is not the right answer.</strong>';
-    return;
-  }
-  clearStoredHash();
-  out.innerHTML = 'Back to the password built into the file.';
-  document.getElementById('pw-answer').value = '';
-}
-
-
-
-/* skip the gate if already unlocked this browser session */
+/* Always show the gate: each visit requires a fresh login. */
 (function(){
-  let ok = false;
-  try{ ok = sessionStorage.getItem('cf_ok') === '1'; }catch(e){}
-  if(ok){ unlock(); }
-  else{
-    document.body.classList.add('locked');
-    const shell = document.getElementById('app-shell');
-    if(shell) shell.classList.add('hidden');
-    setTimeout(() => {
-      const el = document.getElementById('gate-pw');
-      if(el) el.focus();
-    }, 60);
-  }
+  document.body.classList.add('locked');
+  const shell = document.getElementById('app-shell');
+  if(shell) shell.classList.add('hidden');
+  setTimeout(() => {
+    const el = document.getElementById('gate-pw');
+    if(el) el.focus();
+  }, 60);
 })();
-
 
