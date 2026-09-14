@@ -1,0 +1,13 @@
+{
+  "nextEvent": {
+  "kicker": "Next up",
+  "title":  "Open Bracket Night",
+  "when":   "Friday, 7:00 PM Central",
+  "detail": "Free entry. Teams of five, three active and two subs. Sign up in #signups."
+},
+  "items": [
+  {"day": "Friday",    "time": "7:00 PM CT", "what": "Tournaments"},
+  {"day": "Saturday",  "time": "6:00 PM CT", "what": "Season matches"},
+  {"day": "Weeknights", "time": "Varies",    "what": "Solo drafts and exhibitions"}
+]
+}
