@@ -4,6 +4,7 @@ function walkTranslate(root,back){const w=document.createTreeWalker(root,NodeFil
 function applyLang(){document.documentElement.lang=LANG;document.querySelectorAll('.langtog button').forEach(b=>b.classList.toggle('on',b.dataset.l===LANG));if(typeof renderAll==='function')renderAll();walkTranslate(document.body,LANG==='en');}
 function setLang(l){LANG=l;try{localStorage.setItem('cf_lang',l);}catch(e){}applyLang();}
 function buildLangToggle(nav){
+  document.querySelectorAll('.langtog').forEach(toggle=>toggle.remove());
   const d=document.createElement('div');
   d.className='langtog';
   d.innerHTML='<button data-l="en">EN</button><button data-l="es">ES</button>';
