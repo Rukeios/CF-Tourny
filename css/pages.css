@@ -188,17 +188,6 @@
     font-weight:700}
   .page-contact .biz-table tr:last-child td{border-bottom:none}
 
-  .page-contact .langtog{
-    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
-    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
-  }
-  .page-contact .langtog button{
-    font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;
-    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
-    background:transparent;color:var(--muted);transition:.14s;
-  }
-  .page-contact .langtog button:hover{color:var(--teal)}
-  .page-contact .langtog button.on{background:var(--teal);color:#06202E}
   .page-contact .nav-in{align-items:center}
 
 
@@ -298,17 +287,6 @@
   .page-faq .cat:first-of-type{margin-top:0}
   .page-faq .none{color:var(--muted);padding:30px 0;text-align:center;display:none}
 
-  .page-faq .langtog{
-    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
-    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
-  }
-  .page-faq .langtog button{
-    font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;
-    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
-    background:transparent;color:var(--muted);transition:.14s;
-  }
-  .page-faq .langtog button:hover{color:var(--teal)}
-  .page-faq .langtog button.on{background:var(--teal);color:#06202E}
   .page-faq .nav-in{align-items:center}
 
 
@@ -383,17 +361,6 @@
   .page-highlights footer .disc{margin-top:18px;font-size:11.5px;color:var(--muted);
     opacity:.72;max-width:620px;margin-left:auto;margin-right:auto;
     line-height:1.65}
-  .page-highlights .langtog{
-    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
-    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
-  }
-  .page-highlights .langtog button{
-    font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;
-    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
-    background:transparent;color:var(--muted);transition:.14s;
-  }
-  .page-highlights .langtog button:hover{color:var(--teal)}
-  .page-highlights .langtog button.on{background:var(--teal);color:#06202E}
   .page-highlights .nav-in{align-items:center}
 
 
@@ -617,17 +584,6 @@
     .page-index td, .page-index th{padding:9px 8px;font-size:13.5px}
   }
 
-  .page-index .langtog{
-    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
-    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
-  }
-  .page-index .langtog button{
-    font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;
-    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
-    background:transparent;color:var(--muted);transition:.14s;
-  }
-  .page-index .langtog button:hover{color:var(--teal)}
-  .page-index .langtog button.on{background:var(--teal);color:#06202E}
   .page-index .nav-in{align-items:center}
 
 
@@ -741,17 +697,6 @@
     margin-top:8px;background:#fff}
   .page-join .embed iframe{width:100%;border:0;display:block;min-height:640px}
 
-  .page-join .langtog{
-    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
-    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
-  }
-  .page-join .langtog button{
-    font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;
-    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
-    background:transparent;color:var(--muted);transition:.14s;
-  }
-  .page-join .langtog button:hover{color:var(--teal)}
-  .page-join .langtog button.on{background:var(--teal);color:#06202E}
   .page-join .nav-in{align-items:center}
 
 
@@ -843,17 +788,6 @@
   .page-privacy .sec li::marker{color:var(--teal)}
   .page-privacy .updated{color:var(--muted);font-size:13px;margin-bottom:20px}
 
-  .page-privacy .langtog{
-    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
-    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
-  }
-  .page-privacy .langtog button{
-    font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;
-    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
-    background:transparent;color:var(--muted);transition:.14s;
-  }
-  .page-privacy .langtog button:hover{color:var(--teal)}
-  .page-privacy .langtog button.on{background:var(--teal);color:#06202E}
   .page-privacy .nav-in{align-items:center}
 
 
@@ -946,17 +880,6 @@
     padding:15px 18px;margin-bottom:20px;font-size:14.5px;color:var(--sand)}
   .page-rules .note strong{color:var(--coral)}
 
-  .page-rules .langtog{
-    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
-    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
-  }
-  .page-rules .langtog button{
-    font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;
-    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
-    background:transparent;color:var(--muted);transition:.14s;
-  }
-  .page-rules .langtog button:hover{color:var(--teal)}
-  .page-rules .langtog button.on{background:var(--teal);color:#06202E}
   .page-rules .nav-in{align-items:center}
 
 
@@ -1061,17 +984,6 @@
   .page-standings .empty{color:var(--muted);padding:36px 0;text-align:center;
     background:var(--raised);border:1px solid var(--line);border-radius:4px}
 
-  .page-standings .langtog{
-    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
-    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
-  }
-  .page-standings .langtog button{
-    font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;
-    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
-    background:transparent;color:var(--muted);transition:.14s;
-  }
-  .page-standings .langtog button:hover{color:var(--teal)}
-  .page-standings .langtog button.on{background:var(--teal);color:#06202E}
   .page-standings .nav-in{align-items:center}
 
 
@@ -1191,17 +1103,6 @@
   .page-stats .empty{color:var(--muted);padding:38px 0;text-align:center;
     background:var(--raised);border:1px solid var(--line);border-radius:4px}
 
-  .page-stats .langtog{
-    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
-    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
-  }
-  .page-stats .langtog button{
-    font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;
-    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
-    background:transparent;color:var(--muted);transition:.14s;
-  }
-  .page-stats .langtog button:hover{color:var(--teal)}
-  .page-stats .langtog button.on{background:var(--teal);color:#06202E}
   .page-stats .nav-in{align-items:center}
 
 
@@ -1293,17 +1194,6 @@
   .page-terms .sec li::marker{color:var(--teal)}
   .page-terms .updated{color:var(--muted);font-size:13px;margin-bottom:20px}
 
-  .page-terms .langtog{
-    display:flex;gap:0;border:1px solid var(--line);border-radius:3px;
-    overflow:hidden;margin-left:auto;align-self:center;flex-shrink:0;
-  }
-  .page-terms .langtog button{
-    font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;
-    letter-spacing:.09em;padding:8px 12px;border:none;cursor:pointer;
-    background:transparent;color:var(--muted);transition:.14s;
-  }
-  .page-terms .langtog button:hover{color:var(--teal)}
-  .page-terms .langtog button.on{background:var(--teal);color:#06202E}
   .page-terms .nav-in{align-items:center}
 
 
@@ -1814,7 +1704,4 @@
     border-radius:3px;font-family:ui-monospace,monospace;
     font-size:12px;word-break:break-all;color:var(--teal);
   }
-
-
-
 
