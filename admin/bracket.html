@@ -106,27 +106,6 @@
   </div>
 
   
-<div id="pwtool">
-  <h3>Change password</h3>
-  <p>Answer the security question, then set a new password. It applies to
-     this browser straight away. To change it for everyone, paste the hash
-     it gives you over <strong>PASS_HASH</strong> near the bottom of this
-     file and re-upload.</p>
-  <div class="row" style="margin-bottom:9px">
-    <label id="secq-label" style="font-size:13px;color:var(--muted);width:100%"></label>
-  </div>
-  <div class="row" style="margin-bottom:9px">
-    <input type="text" id="pw-answer" placeholder="Answer" autocomplete="off">
-    <button class="sm" onclick="hashAnswer()">Hash an answer</button>
-  </div>
-  <div class="row">
-    <input type="text" id="pw-new" placeholder="New password">
-    <button class="sm" onclick="setPassword()">Set password</button>
-    <button class="sm" onclick="resetPassword()">Reset to file default</button>
-  </div>
-  <code id="pw-out">&nbsp;</code>
-</div>
-
   <textarea id="out" readonly></textarea>
 
   <div id="output">
